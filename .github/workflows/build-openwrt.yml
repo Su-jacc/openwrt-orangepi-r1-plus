@@ -13,7 +13,7 @@ jobs:
       - name: Update and install dependencies
         run: |
           sudo apt update
-          sudo apt install -y build-essential ccache ecj fastjar file g++ gawk gettext git libncurses5-dev libssl-dev python3 rsync subversion swig unzip wget zlib1g-dev
+          sudo apt install -y python3-elftools build-essential ccache ecj fastjar file g++ gawk gettext git libncurses5-dev libssl-dev python3 rsync subversion swig unzip wget zlib1g-dev
 
       - name: Clone OpenWrt
         run: |
@@ -22,12 +22,12 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-      - name: Configure for Orange Pi R1 Plus
+      - name: Configure for Orange Pi R1 Plus lts
         run: |
           cd openwrt
           echo "CONFIG_TARGET_rockchip=y" > .config
           echo "CONFIG_TARGET_rockchip_armv8=y" >> .config
-          echo "CONFIG_TARGET_rockchip_armv8_DEVICE_xunlong_orangepi-r1-plus=y" >> .config
+          echo "CONFIG_TARGET_rockchip_armv8_DEVICE_xunlong_orangepi-r1-plus-lts=y" >> .config
           make defconfig
 
       - name: Build firmware
